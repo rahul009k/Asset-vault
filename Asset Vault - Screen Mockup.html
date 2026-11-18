@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asset Vault - Screen Mockup</title>
+<style>
+  :root {
+    --primary: #2563eb; --primary-dark: #1d4ed8; --bg: #f1f5f9; --card: #ffffff;
+    --text: #0f172a; --muted: #64748b; --border: #e2e8f0; --danger: #dc2626;
+    --success: #16a34a; --warn: #d97706;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 12px 16px; background: #0f172a; color: #fff; }
+  .toolbar strong { margin-right: 12px; }
+  .toolbar button { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+  .toolbar button.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .toolbar .sep { width: 1px; height: 24px; background: #334155; margin: 0 8px; }
+  .stage { padding: 24px; display: flex; justify-content: center; }
+  .frame { width: 100%; max-width: 1100px; background: var(--card); border-radius: 12px; box-shadow: 0 10px 30px rgba(15,23,42,.12); overflow: hidden; border: 1px solid var(--border); }
+  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--border); }
+  .brand { font-weight: 700; font-size: 18px; color: var(--primary); }
+  .user { font-size: 14px; color: var(--muted); }
+  .user b { color: var(--text); }
+  .layout { display: flex; min-height: 520px; }
+  .menu { width: 200px; background: #f8fafc; border-right: 1px solid var(--border); padding: 16px 12px; }
+  .menu a { display: block; padding: 9px 12px; border-radius: 8px; color: var(--text); font-size: 14px; margin-bottom: 4px; }
+  .menu a.current { background: #dbeafe; color: var(--primary-dark); font-weight: 600; }
+  .content { flex: 1; padding: 24px; }
+  h2 { margin: 0 0 16px; font-size: 22px; }
+  .muted { color: var(--muted); font-size: 14px; }
+  .btn { display: inline-block; padding: 9px 16px; border-radius: 8px; border: 1px solid var(--border); background: #fff; font-size: 14px; cursor: pointer; margin: 2px; }
+  .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn.primary:hover { background: var(--primary-dark); }
+  .btn.danger { color: var(--danger); border-color: #fecaca; }
+  .btn.disabled { opacity: .45; cursor: not-allowed; }
+  .actions { margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; }
+  .tag { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: #e2e8f0; }
+  .tag.ok { background: #dcfce7; color: #166534; }
+  .tag.off { background: #fee2e2; color: #991b1b; }
+  input, select { width: 100%; padding: 9px 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; margin: 6px 0 14px; }
+  label { font-size: 13px; color: var(--muted); }
+  .card { border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .center { max-width: 380px; margin: 40px auto; }
+  .alert { padding: 12px 14px; border-radius: 8px; font-size: 14px; margin-bottom: 14px; }
+  .alert.error { background: #fef2f2; color: var(--danger); border: 1px solid #fecaca; }
+  .alert.success { background: #f0fdf4; color: var(--success); border: 1px solid #bbf7d0; }
+  .alert.warn { background: #fffbeb; color: var(--warn); border: 1px solid #fde68a; }
+  .crumb { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+  .meta { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+  .folder-tree { font-size: 14px; line-height: 2; }
+  .split { display: flex; gap: 16px; }
+  .split .folders { width: 190px; border-right: 1px solid var(--border); padding-right: 12px; }
+  .split .list { flex: 1; }
+  .hidden { display: none !important; }
+  .legend { font-size: 12px; color: var(--muted); margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <strong>Screen:</strong>
+  <button class="screen-btn active" data-screen="signin">1 Sign in</button>
+  <button class="screen-btn" data-screen="docs">2 Documents</button>
+  <button class="screen-btn" data-screen="detail">3 Document detail</button>
+  <button class="screen-btn" data-screen="upload">4 Upload version</button>
+  <button class="screen-btn" data-screen="create">5 Create</button>
+  <button class="screen-btn" data-screen="users">6 Users</button>
+  <button class="screen-btn" data-screen="audit">7 Audit log</button>
+  <button class="screen-btn" data-screen="message">8 Messages</button>
+  <span class="sep"></span>
+  <strong>Role:</strong>
+  <button class="role-btn active" data-role="Admin">Admin</button>
+  <button class="role-btn" data-role="Editor">Editor</button>
+  <button class="role-btn" data-role="Viewer">Viewer</button>
+  <button class="role-btn" data-role="Auditor">Auditor</button>
+</div>
+
+<div class="stage">
+  <div class="frame">
+
+    <!-- 1. SIGN IN -->
+    <section data-screen-panel="signin" class="center">
+      <div class="brand" style="text-align:center;font-size:24px;margin-bottom:6px">Asset Vault</div>
+      <p class="muted" style="text-align:center">Sign in to continue</p>
+      <div class="card">
+        <label>Username</label>
+        <input value="bob">
+        <label>Password</label>
+        <input type="password" value="password">
+        <button class="btn primary" style="width:100%">Sign in</button>
+        <div class="alert error hidden" style="margin-top:14px">Wrong username or password.</div>
+      </div>
+      <p class="muted" style="text-align:center;margin-top:14px">Account disabled? Contact an Admin.</p>
+    </section>
+
+    <!-- Shared shell used by screens 2 to 8 -->
+    <div class="shell hidden" data-shell>
+      <div class="topbar">
+        <span class="brand">Asset Vault</span>
+        <span class="user">Signed in as <b data-user>Bob</b> (<span data-role-label>Editor</span>) &nbsp; <button class="btn">Sign out</button></span>
+      </div>
+      <div class="layout">
+        <nav class="menu">
+          <a href="#" data-nav="docs">Documents</a>
+          <a href="#" data-nav="audit" data-needs="audit">Audit log</a>
+          <a href="#" data-nav="users" data-needs="users">Users</a>
+        </nav>
+        <div class="content">
+
+          <!-- 2. DOCUMENTS -->
+          <div data-screen-panel="docs" class="hidden">
+            <h2>Documents</h2>
+            <div class="actions">
+              <button class="btn primary" data-needs="edit">+ New document</button>
+              <button class="btn" data-needs="edit">+ New folder</button>
+            </div>
+            <div class="split">
+              <div class="folders folder-tree">
+                <div><b>All</b></div>
+                <div>Contracts</div>
+                <div>&nbsp;&nbsp;2026</div>
+                <div>Designs</div>
+                <div>Finance</div>
+              </div>
+              <div class="list">
+                <input placeholder="Search documents" style="margin-top:0">
+                <table>
+                  <tr><th>Title</th><th>Type</th><th>Version</th><th>Updated</th></tr>
+                  <tr><td>Q3 report</td><td>PDF</td><td>v4</td><td>Nov 12</td></tr>
+                  <tr><td>Budget</td><td>XLSX</td><td>v2</td><td>Nov 10</td></tr>
+                  <tr><td>Logo</td><td>PNG</td><td>v1</td><td>Nov 01</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. DOCUMENT DETAIL -->
+          <div data-screen-panel="detail" class="hidden">
+            <div class="crumb">Contracts / 2026 / Q3 report</div>
+            <h2>Q3 report</h2>
+            <p class="meta">Owner: Bob &nbsp;·&nbsp; Current version: v4</p>
+            <div class="actions">
+              <button class="btn">Download</button>
+              <button class="btn" data-needs="edit" data-screen-link="upload">Upload new version</button>
+              <button class="btn" data-needs="edit">Rename</button>
+              <button class="btn" data-needs="edit">Move</button>
+              <button class="btn danger" data-needs="edit">Delete</button>
+            </div>
+            <h3 style="font-size:16px">Version history</h3>
+            <table>
+              <tr><th>Version</th><th>Date</th><th>By</th><th>File</th><th></th></tr>
+              <tr><td>v4</td><td>Nov 12</td><td>Bob</td><td>Q3 report.pdf</td><td><button class="btn">Download</button></td></tr>
+              <tr><td>v3</td><td>Nov 05</td><td>Bob</td><td>Q3 report.pdf</td><td><button class="btn">Download</button> <button class="btn" data-needs="edit">Restore</button></td></tr>
+              <tr><td>v2</td><td>Oct 28</td><td>Alice</td><td>draft.pdf</td><td><button class="btn">Download</button> <button class="btn" data-needs="edit">Restore</button></td></tr>
+            </table>
+          </div>
+
+          <!-- 4. UPLOAD VERSION -->
+          <div data-screen-panel="upload" class="hidden">
+            <div class="crumb">Q3 report / Upload</div>
+            <h2>Upload new version</h2>
+            <div class="card" style="max-width:560px">
+              <label>Choose file</label>
+              <input type="file" style="border:none;padding:0">
+              <label>Note (optional)</label>
+              <input placeholder="What changed?">
+              <div style="text-align:right;margin-top:8px">
+                <button class="btn">Cancel</button>
+                <button class="btn primary">Upload</button>
+              </div>
+            </div>
+            <p class="muted">Allowed: PDF, Word, Excel, PNG, JPG, GIF, TXT, CSV. Max 20 MB.</p>
+          </div>
+
+          <!-- 5. CREATE -->
+          <div data-screen-panel="create" class="hidden">
+            <h2>New document</h2>
+            <div class="card" style="max-width:520px">
+              <label>Title</label>
+              <input placeholder="e.g. Q4 forecast">
+              <label>Folder</label>
+              <select><option>Contracts / 2026</option><option>Designs</option><option>Finance</option></select>
+              <label>File (optional)</label>
+              <input type="file" style="border:none;padding:0">
+              <div style="text-align:right;margin-top:8px">
+                <button class="btn">Cancel</button>
+                <button class="btn primary">Create</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. USERS -->
+          <div data-screen-panel="users" class="hidden">
+            <h2>Users and roles</h2>
+            <div class="actions"><button class="btn primary">+ Add user</button></div>
+            <table>
+              <tr><th>Name</th><th>Role</th><th>Status</th><th></th></tr>
+              <tr><td>Alice</td><td>Admin</td><td><span class="tag ok">Active</span></td><td><button class="btn">Edit</button></td></tr>
+              <tr><td>Bob</td><td>Editor</td><td><span class="tag ok">Active</span></td><td><button class="btn">Edit</button></td></tr>
+              <tr><td>Carol</td><td>Viewer</td><td><span class="tag ok">Active</span></td><td><button class="btn">Edit</button></td></tr>
+              <tr><td>Dan</td><td>Auditor</td><td><span class="tag off">Disabled</span></td><td><button class="btn">Edit</button></td></tr>
+            </table>
+          </div>
+
+          <!-- 7. AUDIT LOG -->
+          <div data-screen-panel="audit" class="hidden">
+            <h2>Audit log</h2>
+            <div class="actions">
+              <select style="width:auto;display:inline-block"><option>All types</option><option>Created</option><option>Uploaded</option><option>Deleted</option></select>
+              <select style="width:auto;display:inline-block"><option>All people</option><option>Alice</option><option>Bob</option></select>
+              <button class="btn">Apply</button>
+            </div>
+            <table>
+              <tr><th>Time</th><th>Who</th><th>What</th></tr>
+              <tr><td>Nov 12 10:04</td><td>Bob</td><td>Uploaded version 4 of Q3 report</td></tr>
+              <tr><td>Nov 12 09:51</td><td>Alice</td><td>Created document Budget</td></tr>
+              <tr><td>Nov 11 16:20</td><td>Bob</td><td>Moved Logo to Designs</td></tr>
+              <tr><td>Nov 10 11:02</td><td>Alice</td><td>Deleted draft notes</td></tr>
+            </table>
+          </div>
+
+          <!-- 8. MESSAGES -->
+          <div data-screen-panel="message" class="hidden">
+            <h2>Message examples</h2>
+            <div class="alert error">This file cannot be uploaded. The file is 25 MB; the limit is 20 MB.</div>
+            <div class="alert warn">This document was changed by someone else. <button class="btn">Reload</button></div>
+            <div class="alert success">New version saved.</div>
+            <div class="alert error">You do not have permission to do this.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<p class="legend stage" style="padding-top:0">Click a screen above to view it. Switch roles to see which buttons each role gets. Buttons a role cannot use are hidden.</p>
+
+<script>
+  const roles = {
+    Admin:   { user: "Alice",  edit: true,  audit: true,  users: true,  download: true },
+    Editor:  { user: "Bob",    edit: true,  audit: false, users: false, download: true },
+    Viewer:  { user: "Carol",  edit: false, audit: false, users: false, download: true },
+    Auditor: { user: "Dan",    edit: false, audit: true,  users: false, download: false }
+  };
+  let currentRole = "Admin";
+  let currentScreen = "signin";
+
+  function showScreen(name) {
+    currentScreen = name;
+    document.querySelectorAll(".screen-btn").forEach(b => b.classList.toggle("active", b.dataset.screen === name));
+    const signin = name === "signin";
+    document.querySelector('[data-screen-panel="signin"]').classList.toggle("hidden", !signin);
+    document.querySelector("[data-shell]").classList.toggle("hidden", signin);
+    if (signin) return;
+    document.querySelectorAll("[data-screen-panel]").forEach(p => {
+      if (p.dataset.screenPanel !== "signin") p.classList.toggle("hidden", p.dataset.screenPanel !== name);
+    });
+    document.querySelectorAll(".menu a").forEach(a => {
+      a.classList.toggle("current", a.dataset.nav === name || (name === "detail" || name === "upload" || name === "create") && a.dataset.nav === "docs");
+    });
+    applyRole();
+  }
+
+  function applyRole() {
+    const r = roles[currentRole];
+    document.querySelector("[data-user]").textContent = r.user;
+    document.querySelector("[data-role-label]").textContent = currentRole;
+    document.querySelectorAll("[data-needs]").forEach(el => {
+      const need = el.dataset.needs;
+      let allowed = true;
+      if (need === "edit") allowed = r.edit;
+      if (need === "audit") allowed = r.audit;
+      if (need === "users") allowed = r.users;
+      el.classList.toggle("hidden", !allowed);
+    });
+    document.querySelectorAll(".menu a[data-needs]").forEach(a => {
+      a.classList.toggle("hidden", !roles[currentRole][a.dataset.needs]);
+    });
+    document.querySelectorAll(".btn.primary, .btn").forEach(() => {});
+  }
+
+  document.querySelectorAll(".screen-btn").forEach(b => b.addEventListener("click", () => showScreen(b.dataset.screen)));
+  document.querySelectorAll(".role-btn").forEach(b => b.addEventListener("click", () => {
+    currentRole = b.dataset.role;
+    document.querySelectorAll(".role-btn").forEach(x => x.classList.toggle("active", x === b));
+    applyRole();
+  }));
+  document.querySelectorAll(".menu a").forEach(a => a.addEventListener("click", e => {
+    e.preventDefault();
+    showScreen(a.dataset.nav);
+  }));
+  document.querySelectorAll("[data-screen-link]").forEach(el => el.addEventListener("click", () => showScreen(el.dataset.screenLink)));
+
+  showScreen("signin");
+</script>
+</body>
+</html>
